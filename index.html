@@ -94,23 +94,14 @@
       color: white;
       border: none;
       border-radius: 5px;
-      padding: 4px 8px;
+      padding: 6px 10px;
       cursor: pointer;
-      font-size: 12px;
       font-weight: bold;
-      margin-left: 12px;
-      flex-shrink: 0;
-    }
-    
-    .silBtn:hover {
-      background-color: #cc0000;
+      margin-left: 10px;
     }
 
-    #indirBtn {
-      margin-top: 10px;
-      background-color: #000;
-      color: #f9d71c;
-      font-weight: bold;
+    .silBtn:hover {
+      background-color: #cc0000;
     }
   </style>
 </head>
@@ -138,11 +129,6 @@
 
   <h2>Kaydedilen Veriler (Bu Ay)</h2>
   <ul id="veriListesi"></ul>
-
-  <button id="indirBtn" onclick="indirPDF()">📄 PDF Olarak İndir</button>
-
-  <!-- PDF oluşturmak için gerekli kütüphane -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     function getCurrentMonthKey() {
@@ -182,7 +168,9 @@
         const btn = document.createElement("button");
         btn.textContent = "Sil";
         btn.className = "silBtn";
-        btn.onclick = () => silVeri(index);
+        btn.onclick = () => {
+          silVeri(index);
+        };
 
         li.appendChild(span);
         li.appendChild(btn);
@@ -227,29 +215,8 @@
       listeGuncelle();
     }
 
-    function indirPDF() {
-      const liste = document.getElementById("veriListesi");
-
-      if (liste.innerText.trim() === "" || liste.innerText.includes("Henüz veri yok")) {
-        alert("İndirilecek veri yok.");
-        return;
-      }
-
-      const element = document.createElement("div");
-      element.innerHTML = `<h2>Sütlüzade Kayıtları (${getCurrentMonthKey()})</h2><ul style="padding-left:0;">${liste.innerHTML}</ul>`;
-
-      const opt = {
-        margin: 0.5,
-        filename: `sutluzade-kayitlar-${getCurrentMonthKey()}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().from(element).set(opt).save();
-    }
-
     listeGuncelle();
   </script>
+
 </body>
 </html>
