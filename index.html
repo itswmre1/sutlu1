@@ -87,7 +87,6 @@
 
     .veriMetni {
       flex: 1;
-      padding-right: 10px;
     }
 
     .silBtn {
@@ -102,7 +101,7 @@
       margin-left: 12px;
       flex-shrink: 0;
     }
-
+    
     .silBtn:hover {
       background-color: #cc0000;
     }
@@ -137,7 +136,7 @@
 
   <hr />
 
-  <h2>Kayıtlar</h2>
+  <h2>Kaydedilen Veriler (Bu Ay)</h2>
   <ul id="veriListesi"></ul>
 
   <button id="indirBtn" onclick="indirPDF()">📄 PDF Olarak İndir</button>
@@ -237,7 +236,7 @@
       }
 
       const element = document.createElement("div");
-      element.innerHTML = `<h2>Sütlüzade Kayıtları</h2><ul style="padding-left:0;">${liste.innerHTML}</ul>`;
+      element.innerHTML = `<h2>Sütlüzade Kayıtları (${getCurrentMonthKey()})</h2><ul style="padding-left:0;">${liste.innerHTML}</ul>`;
 
       const opt = {
         margin: 0.5,
